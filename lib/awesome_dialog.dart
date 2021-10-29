@@ -72,6 +72,8 @@ class AwesomeDialog {
   /// This Prop is usefull to Take advantage of screen dimensions
   final bool isDense;
 
+  final bool isFull;
+
   /// Whenever the animation Header loops or not.
   final bool headerAnimationLoop;
 
@@ -127,6 +129,7 @@ class AwesomeDialog {
     this.btnCancelColor,
     this.onDissmissCallback,
     this.isDense = false,
+    this.isFull = false,
     this.dismissOnTouchOutside = true,
     this.headerAnimationLoop = true,
     this.aligment = Alignment.center,
@@ -206,6 +209,7 @@ class AwesomeDialog {
           desc: this.desc,
           body: this.body,
           isDense: isDense,
+          isFull: isFull,
           alignment: aligment,
           keyboardAware: keyboardAware,
           width: width,

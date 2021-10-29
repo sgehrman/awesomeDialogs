@@ -8,6 +8,7 @@ class VerticalStackDialog extends StatelessWidget {
   final Widget? header;
   final Widget? body;
   final bool isDense;
+  final bool isFull;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry padding;
   final bool keyboardAware;
@@ -28,6 +29,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.body,
     this.alignment,
     this.isDense = true,
+    this.isFull = false,
     required this.header,
     required this.padding,
     this.keyboardAware = true,
@@ -52,11 +54,11 @@ class VerticalStackDialog extends StatelessWidget {
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
-            padding: isDense
+            padding: isFull ? const EdgeInsets.all(0) : (isDense
                 ? const EdgeInsets.only(
                     top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
                 : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0)),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??
@@ -75,7 +77,7 @@ class VerticalStackDialog extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SizedBox(
-                        height: header != null ? 50.0 : 15,
+                        height: header != null ? 50.0 : 0,
                       ),
                       body ??
                           Column(
