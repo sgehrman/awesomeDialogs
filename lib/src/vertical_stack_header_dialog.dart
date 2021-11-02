@@ -67,6 +67,7 @@ class VerticalStackDialog extends StatelessWidget {
                     ),
                 side: borderSide ?? BorderSide.none,
               ),
+              type: MaterialType.transparency,
               elevation: 0.5,
               color: dialogBackgroundColor ?? theme.cardColor,
               child: Padding(
