@@ -110,6 +110,8 @@ class AwesomeDialog {
   /// Set BorderSide of DialogShape
   final BorderSide? borderSide;
 
+  final MaterialType materialType;
+
   AwesomeDialog({
     required this.context,
     this.dialogType = DialogType.INFO,
@@ -147,6 +149,7 @@ class AwesomeDialog {
     this.dialogBackgroundColor,
     this.borderSide,
     this.buttonsTextStyle,
+    this.materialType = MaterialType.canvas,
   });
 
   bool isDissmisedBySystem = false;
@@ -213,6 +216,7 @@ class AwesomeDialog {
           alignment: aligment,
           keyboardAware: keyboardAware,
           width: width,
+          materialType: this.materialType,
           padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),

@@ -19,9 +19,11 @@ class VerticalStackDialog extends StatelessWidget {
   final Color? dialogBackgroundColor;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
+  final MaterialType materialType;
 
   const VerticalStackDialog({
     Key? key,
+    this.materialType = MaterialType.canvas,
     this.title,
     this.desc,
     this.btnOk,
@@ -67,7 +69,7 @@ class VerticalStackDialog extends StatelessWidget {
                     ),
                 side: borderSide ?? BorderSide.none,
               ),
-              type: MaterialType.transparency,
+              type: materialType,
               elevation: 0.5,
               color: dialogBackgroundColor ?? theme.cardColor,
               child: Padding(
