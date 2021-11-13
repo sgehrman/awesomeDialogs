@@ -112,6 +112,8 @@ class AwesomeDialog {
 
   final MaterialType materialType;
 
+  final Color? barrierColor;
+
   AwesomeDialog({
     required this.context,
     this.dialogType = DialogType.INFO,
@@ -150,6 +152,7 @@ class AwesomeDialog {
     this.borderSide,
     this.buttonsTextStyle,
     this.materialType = MaterialType.canvas,
+    this.barrierColor = Colors.black54,
   });
 
   bool isDissmisedBySystem = false;
@@ -160,6 +163,7 @@ class AwesomeDialog {
           context: this.context,
           useRootNavigator: useRootNavigator,
           barrierDismissible: dismissOnTouchOutside,
+          barrierColor: barrierColor,
           builder: (BuildContext context) {
             if (autoHide != null) {
               Future.delayed(autoHide!).then((value) => dismiss());
