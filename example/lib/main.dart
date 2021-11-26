@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'routes.dart';
 
@@ -296,7 +297,8 @@ class _HomePageState extends State<HomePage> {
                               child: TextFormField(
                                 autofocus: true,
                                 keyboardType: TextInputType.multiline,
-                                maxLengthEnforced: true,
+                                maxLengthEnforcement:
+                                    MaxLengthEnforcement.enforced,
                                 minLines: 2,
                                 maxLines: null,
                                 decoration: InputDecoration(
