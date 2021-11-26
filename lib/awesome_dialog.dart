@@ -1,5 +1,7 @@
 library awesome_dialog;
 
+import 'package:flutter/services.dart';
+
 import 'src/anims/anims.dart';
 import 'src/animated_button.dart';
 import 'src/anims/flare_header.dart';
@@ -10,7 +12,15 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
+enum DialogType {
+  INFO,
+  INFO_REVERSED,
+  WARNING,
+  ERROR,
+  SUCCES,
+  QUESTION,
+  NO_HEADER
+}
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, OTHER }
 
@@ -205,8 +215,22 @@ class AwesomeDialog {
     );
   }
 
-  Widget get _buildDialog => WillPopScope(
-        onWillPop: _onWillPop,
+  Widget get _buildDialog {
+    final focusNode = FocusNode();
+    focusNode.attach(context);
+
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: KeyboardListener(
+        focusNode: focusNode,
+        autofocus: true,
+        onKeyEvent: (v) {
+          // return key returns OK
+          if (v.logicalKey == LogicalKeyboardKey.enter) {
+            _dismissType = DismissType.BTN_OK;
+            dismiss.call();
+          }
+        },
         child: VerticalStackDialog(
           dialogBackgroundColor: dialogBackgroundColor,
           borderSide: borderSide,
@@ -223,7 +247,8 @@ class AwesomeDialog {
           materialType: this.materialType,
           padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          btnCancel: btnCancel ??
+              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
           showCloseIcon: this.showCloseIcon,
           onClose: () {
             _dismissType = DismissType.TOP_ICON;
@@ -231,7 +256,9 @@ class AwesomeDialog {
           },
           closeIcon: closeIcon,
         ),
-      );
+      ),
+    );
+  }
 
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
@@ -262,7 +289,8 @@ class AwesomeDialog {
       );
 
   dismiss() {
-    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator).pop();
+    if (!isDissmisedBySystem)
+      Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;
