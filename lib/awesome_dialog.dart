@@ -267,7 +267,7 @@ class AwesomeDialog {
           dismiss();
           btnOkOnPress?.call();
         },
-        text: btnOkText ?? 'Ok',
+        text: btnOkText ?? 'OK',
         color: btnOkColor ?? const Color(0xFF00CA71),
         icon: btnOkIcon,
         borderRadius: buttonsBorderRadius,
